@@ -47,31 +47,27 @@ function WidthProvider(ComposedComponent) {
       }
 
       return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
-        width: 1280,
-        firstLoad: true
+        width: 1280
       }, _this.mounted = false, _this.onWindowResize = function () {
         if (!_this.mounted) return;
         // eslint-disable-next-line
         var node = _reactDom2.default.findDOMNode(_this); // Flow casts this to Text | Element
         if (node instanceof HTMLElement) _this.setState({ width: node.offsetWidth });
-      }, _this.resizeFirstLoad = function (firstLoad) {
-        if (firstLoad) {
-          _this.setState({ firstLoad: false });
-          setTimeout(function () {
-            _this.onWindowResize();
-          }, 500);
-        }
       }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     WidthProvider.prototype.componentDidMount = function componentDidMount() {
+      var _this2 = this;
+
       this.mounted = true;
 
       window.addEventListener("resize", this.onWindowResize);
       // Call to properly set the breakpoint and resize the elements.
       // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
       // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
-      this.onWindowResize();
+      setTimeout(function () {
+        _this2.onWindowResize();
+      }, 500);
     };
 
     WidthProvider.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -80,14 +76,6 @@ function WidthProvider(ComposedComponent) {
     };
 
     WidthProvider.prototype.render = function render() {
-      var firstLoad = this.state.firstLoad;
-
-
-      if (firstLoad) {
-        this.resizeFirstLoad(firstLoad);
-        return null;
-      }
-
       var _props = this.props,
           measureBeforeMount = _props.measureBeforeMount,
           rest = _objectWithoutProperties(_props, ["measureBeforeMount"]);
