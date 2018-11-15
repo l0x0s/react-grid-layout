@@ -11,7 +11,8 @@ type WPProps = {
 };
 
 type WPState = {
-  width: number
+  width: number,
+  firstLoad: boolean,
 };
 
 /*
@@ -35,7 +36,8 @@ export default function WidthProvider<
     };
 
     state = {
-      width: 1280
+      width: 1280,
+      firstLoad: true,
     };
 
     mounted: boolean = false;
@@ -63,7 +65,18 @@ export default function WidthProvider<
         this.setState({ width: node.offsetWidth });
     };
 
+    resizeFirstLoad = (firstLoad) => {
+      if(firstLoad){
+        this.setState({firstLoad:false})
+        setTimeout(()=>{
+          this.onWindowResize();
+        },500);
+      }
+    };
+
     render() {
+      const {firstLoad} = this.state;
+      this.resizeFirstLoad(firstLoad);
       const { measureBeforeMount, ...rest } = this.props;
       if (measureBeforeMount && !this.mounted) {
         return (
