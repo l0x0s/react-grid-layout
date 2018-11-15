@@ -82,7 +82,11 @@ function WidthProvider(ComposedComponent) {
     WidthProvider.prototype.render = function render() {
       var firstLoad = this.state.firstLoad;
 
-      this.resizeFirstLoad(firstLoad);
+
+      if (firstLoad) {
+        this.resizeFirstLoad(firstLoad);
+        return null;
+      }
 
       var _props = this.props,
           measureBeforeMount = _props.measureBeforeMount,

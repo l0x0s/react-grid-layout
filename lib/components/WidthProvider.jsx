@@ -76,7 +76,12 @@ export default function WidthProvider<
 
     render() {
       const {firstLoad} = this.state;
-      this.resizeFirstLoad(firstLoad);
+      
+      if(firstLoad){
+        this.resizeFirstLoad(firstLoad);
+        return null
+      }
+
       const { measureBeforeMount, ...rest } = this.props;
       if (measureBeforeMount && !this.mounted) {
         return (
