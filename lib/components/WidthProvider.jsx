@@ -11,7 +11,7 @@ type WPProps = {
 };
 
 type WPState = {
-  width: number,
+  width: number
 };
 
 /*
@@ -35,7 +35,7 @@ export default function WidthProvider<
     };
 
     state = {
-      width: 1280,
+      width: 1280
     };
 
     mounted: boolean = false;
@@ -47,9 +47,9 @@ export default function WidthProvider<
       // Call to properly set the breakpoint and resize the elements.
       // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
       // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
-      setTimeout(()=>{
+      setInterval(() => {
         this.onWindowResize();
-      },500);
+      }, 800);
     }
 
     componentWillUnmount() {
@@ -66,7 +66,6 @@ export default function WidthProvider<
     };
 
     render() {
-        
       const { measureBeforeMount, ...rest } = this.props;
       if (measureBeforeMount && !this.mounted) {
         return (
