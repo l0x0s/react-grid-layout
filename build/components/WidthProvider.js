@@ -136,9 +136,32 @@ function WidthProvider(ComposedComponent) {
         // Call to properly set the breakpoint and resize the elements.
         // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
         // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
-        setInterval(function() {
-          _this2.onWindowResize();
-        }, 800);
+        var times = [500, 1000, 1500, 2000, 3000, 4000, 5000];
+        for (
+          var _iterator = times,
+            _isArray = Array.isArray(_iterator),
+            _i = 0,
+            _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();
+          ;
+
+        ) {
+          var _ref;
+
+          if (_isArray) {
+            if (_i >= _iterator.length) break;
+            _ref = _iterator[_i++];
+          } else {
+            _i = _iterator.next();
+            if (_i.done) break;
+            _ref = _i.value;
+          }
+
+          var t = _ref;
+
+          setTimeout(function() {
+            _this2.onWindowResize();
+          }, t);
+        }
       };
 
       WidthProvider.prototype.componentWillUnmount = function componentWillUnmount() {

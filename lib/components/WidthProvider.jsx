@@ -47,9 +47,12 @@ export default function WidthProvider<
       // Call to properly set the breakpoint and resize the elements.
       // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
       // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
-      setInterval(() => {
-        this.onWindowResize();
-      }, 800);
+      const times = [500, 1000, 1500, 2000, 3000, 4000, 5000];
+      for (let t of times) {
+        setTimeout(() => {
+          this.onWindowResize();
+        }, t);
+      }
     }
 
     componentWillUnmount() {
