@@ -64,21 +64,18 @@ export default function WidthProvider<
       if (!this.mounted) return;
       // eslint-disable-next-line
       const node = ReactDOM.findDOMNode(this); // Flow casts this to Text | Element
-      if (node instanceof HTMLElement){
-        console.log("node: ", node)
-        console.log("node width: ", node.offsetWidth)
+      if (node instanceof HTMLElement)
         this.setState({ width: node.offsetWidth });
-      }
     };
 
     render() {
       const { measureBeforeMount, ...rest } = this.props;
-      // if (measureBeforeMount && !this.mounted) {
-      //   return (
-      //     <div className={this.props.className} style={this.props.style} />
-      //   );
-      // }
-      console.log("REST: ", ...rest, "State: ", ...this.state)
+      if (measureBeforeMount && !this.mounted) {
+        return (
+          <div className={this.props.className} style={this.props.style} />
+        );
+      }
+
       return <ComposedComponent {...rest} {...this.state} />;
     }
   };
