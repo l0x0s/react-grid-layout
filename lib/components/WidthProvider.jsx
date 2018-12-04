@@ -57,11 +57,13 @@ export default function WidthProvider<
     componentWillUnmount() {
       this.mounted = false;
       this.onWindowResize();
-      // window.removeEventListener("resize", this.onWindowResize);
+      window.removeEventListener("resize", this.onWindowResize);
     }
 
     onWindowResize = () => {
+      console.log("window resize")
       if (!this.mounted) return;
+      console.log("Mounted")
       // eslint-disable-next-line
       const node = ReactDOM.findDOMNode(this); // Flow casts this to Text | Element
       if (node instanceof HTMLElement)
@@ -69,7 +71,11 @@ export default function WidthProvider<
     };
 
     render() {
+      console.log("render")
+
       const { measureBeforeMount, ...rest } = this.props;
+      console.log("measure before mount - render")
+
       if (measureBeforeMount && !this.mounted) {
         return (
           <div className={this.props.className} style={this.props.style} />
