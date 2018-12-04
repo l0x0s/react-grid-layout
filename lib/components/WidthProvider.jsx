@@ -65,6 +65,7 @@ export default function WidthProvider<
       // eslint-disable-next-line
       const node = ReactDOM.findDOMNode(this); // Flow casts this to Text | Element
       if (node instanceof HTMLElement){
+        console.log("node: ", node)
         console.log("node width: ", node.offsetWidth)
         this.setState({ width: node.offsetWidth });
       }
@@ -72,12 +73,12 @@ export default function WidthProvider<
 
     render() {
       const { measureBeforeMount, ...rest } = this.props;
-      if (measureBeforeMount && !this.mounted) {
-        return (
-          <div className={this.props.className} style={this.props.style} />
-        );
-      }
-
+      // if (measureBeforeMount && !this.mounted) {
+      //   return (
+      //     <div className={this.props.className} style={this.props.style} />
+      //   );
+      // }
+      console.log("REST: ", ...rest, "State: ", ...this.state)
       return <ComposedComponent {...rest} {...this.state} />;
     }
   };

@@ -53,6 +53,7 @@ function WidthProvider(ComposedComponent) {
         // eslint-disable-next-line
         var node = _reactDom2.default.findDOMNode(_this); // Flow casts this to Text | Element
         if (node instanceof HTMLElement) {
+          console.log("node: ", node);
           console.log("node width: ", node.offsetWidth);
           _this.setState({ width: node.offsetWidth });
         }
@@ -95,14 +96,19 @@ function WidthProvider(ComposedComponent) {
     };
 
     WidthProvider.prototype.render = function render() {
+      var _console;
+
       var _props = this.props,
           measureBeforeMount = _props.measureBeforeMount,
           rest = _objectWithoutProperties(_props, ["measureBeforeMount"]);
+      // if (measureBeforeMount && !this.mounted) {
+      //   return (
+      //     <div className={this.props.className} style={this.props.style} />
+      //   );
+      // }
 
-      if (measureBeforeMount && !this.mounted) {
-        return _react2.default.createElement("div", { className: this.props.className, style: this.props.style });
-      }
 
+      (_console = console).log.apply(_console, ["REST: "].concat(rest, ["State: "], this.state));
       return _react2.default.createElement(ComposedComponent, _extends({}, rest, this.state));
     };
 
