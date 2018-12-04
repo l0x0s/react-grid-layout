@@ -49,17 +49,20 @@ function WidthProvider(ComposedComponent) {
       return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
         width: 1280
       }, _this.mounted = false, _this.onWindowResize = function () {
-        console.log("window resize");
         if (!_this.mounted) return;
-        console.log("Mounted");
         // eslint-disable-next-line
         var node = _reactDom2.default.findDOMNode(_this); // Flow casts this to Text | Element
-        if (node instanceof HTMLElement) _this.setState({ width: node.offsetWidth });
+        if (node instanceof HTMLElement) {
+          console.log("node width: ", node.offsetWidth);
+          _this.setState({ width: node.offsetWidth });
+        }
       }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     WidthProvider.prototype.componentDidMount = function componentDidMount() {
       var _this2 = this;
+
+      this.mounted = true;
 
       window.addEventListener("resize", this.onWindowResize);
       // Call to properly set the breakpoint and resize the elements.
@@ -81,7 +84,6 @@ function WidthProvider(ComposedComponent) {
         var t = _ref;
 
         setTimeout(function () {
-          _this2.mounted = true;
           _this2.onWindowResize();
         }, t);
       }
@@ -89,18 +91,13 @@ function WidthProvider(ComposedComponent) {
 
     WidthProvider.prototype.componentWillUnmount = function componentWillUnmount() {
       this.mounted = false;
-      this.onWindowResize();
       window.removeEventListener("resize", this.onWindowResize);
     };
 
     WidthProvider.prototype.render = function render() {
-      console.log("render");
-
       var _props = this.props,
           measureBeforeMount = _props.measureBeforeMount,
           rest = _objectWithoutProperties(_props, ["measureBeforeMount"]);
-
-      console.log("measure before mount - render");
 
       if (measureBeforeMount && !this.mounted) {
         return _react2.default.createElement("div", { className: this.props.className, style: this.props.style });
