@@ -130,8 +130,6 @@ function WidthProvider(ComposedComponent) {
       WidthProvider.prototype.componentDidMount = function componentDidMount() {
         var _this2 = this;
 
-        this.mounted = true;
-
         window.addEventListener("resize", this.onWindowResize);
         // Call to properly set the breakpoint and resize the elements.
         // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
@@ -159,6 +157,7 @@ function WidthProvider(ComposedComponent) {
           var t = _ref;
 
           setTimeout(function() {
+            _this2.mounted = true;
             _this2.onWindowResize();
           }, t);
         }
@@ -166,7 +165,8 @@ function WidthProvider(ComposedComponent) {
 
       WidthProvider.prototype.componentWillUnmount = function componentWillUnmount() {
         this.mounted = false;
-        window.removeEventListener("resize", this.onWindowResize);
+        this.onWindowResize();
+        // window.removeEventListener("resize", this.onWindowResize);
       };
 
       WidthProvider.prototype.render = function render() {
