@@ -41,6 +41,8 @@ export default function WidthProvider<
     mounted: boolean = false;
 
     componentDidMount() {
+      this.mounted = true;
+
       window.addEventListener("resize", this.onWindowResize);
       // Call to properly set the breakpoint and resize the elements.
       // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
@@ -48,7 +50,6 @@ export default function WidthProvider<
       const times = [500, 1000, 1500, 2000, 3000, 4000, 5000];
       for (let t of times) {
         setTimeout(() => {
-          this.mounted = true;
           this.onWindowResize();
         }, t);
       }
@@ -56,26 +57,21 @@ export default function WidthProvider<
 
     componentWillUnmount() {
       this.mounted = false;
-      this.onWindowResize();
       window.removeEventListener("resize", this.onWindowResize);
     }
 
     onWindowResize = () => {
-      console.log("window resize")
       if (!this.mounted) return;
-      console.log("Mounted")
       // eslint-disable-next-line
       const node = ReactDOM.findDOMNode(this); // Flow casts this to Text | Element
-      if (node instanceof HTMLElement)
+      if (node instanceof HTMLElement){
+        console.log("node width: ", node.offsetWidth)
         this.setState({ width: node.offsetWidth });
+      }
     };
 
     render() {
-      console.log("render")
-
       const { measureBeforeMount, ...rest } = this.props;
-      console.log("measure before mount - render")
-
       if (measureBeforeMount && !this.mounted) {
         return (
           <div className={this.props.className} style={this.props.style} />
