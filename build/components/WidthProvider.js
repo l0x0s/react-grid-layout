@@ -89,10 +89,10 @@ function WidthProvider(ComposedComponent) {
       }
     };
 
-    WidthProvider.prototype.componentWillUnmount = function componentWillUnmount() {
-      this.mounted = false;
-      window.removeEventListener("resize", this.onWindowResize);
-    };
+    // componentWillUnmount() {
+    //   this.mounted = false;
+    //   window.removeEventListener("resize", this.onWindowResize);
+    // }
 
     WidthProvider.prototype.render = function render() {
       var _props = this.props,

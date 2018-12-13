@@ -55,10 +55,10 @@ export default function WidthProvider<
       }
     }
 
-    componentWillUnmount() {
-      this.mounted = false;
-      window.removeEventListener("resize", this.onWindowResize);
-    }
+    // componentWillUnmount() {
+    //   this.mounted = false;
+    //   window.removeEventListener("resize", this.onWindowResize);
+    // }
 
     onWindowResize = () => {
       console.log("Resize")
