@@ -48,14 +48,11 @@ function WidthProvider(ComposedComponent) {
 
       return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
         width: 1280
-      }, _this.mounted = false, _this.onWindowResize = function (hit) {
-        if (!_this.mounted && !hit) return;
+      }, _this.mounted = false, _this.onWindowResize = function () {
+        if (!_this.mounted) return;
         // eslint-disable-next-line
         var node = _reactDom2.default.findDOMNode(_this); // Flow casts this to Text | Element
-        if (node instanceof HTMLElement) {
-          console.log("node: ", node);
-          _this.setState({ width: node.offsetWidth });
-        }
+        if (node instanceof HTMLElement) _this.setState({ width: node.offsetWidth });
       }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -84,7 +81,7 @@ function WidthProvider(ComposedComponent) {
         var t = _ref;
 
         setTimeout(function () {
-          _this2.onWindowResize(true);
+          _this2.onWindowResize();
         }, t);
       }
     };
@@ -98,9 +95,6 @@ function WidthProvider(ComposedComponent) {
       var _props = this.props,
           measureBeforeMount = _props.measureBeforeMount,
           rest = _objectWithoutProperties(_props, ["measureBeforeMount"]);
-
-      console.log("Props: ", this.props);
-      console.log("State: ", this.state);
 
       if (measureBeforeMount && !this.mounted) {
         return _react2.default.createElement("div", { className: this.props.className, style: this.props.style });

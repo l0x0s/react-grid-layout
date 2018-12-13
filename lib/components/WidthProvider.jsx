@@ -50,7 +50,7 @@ export default function WidthProvider<
       const times = [500, 1000, 1500];
       for (let t of times) {
         setTimeout(() => {
-          this.onWindowResize(true);
+          this.onWindowResize();
         }, t);
       }
     }
@@ -60,22 +60,16 @@ export default function WidthProvider<
       window.removeEventListener("resize", this.onWindowResize);
     }
 
-    onWindowResize = (hit) => {
-      if (!this.mounted && !hit) return;
+    onWindowResize = () => {
+      if (!this.mounted) return;
       // eslint-disable-next-line
       const node = ReactDOM.findDOMNode(this); // Flow casts this to Text | Element
-      if (node instanceof HTMLElement){
-        console.log("node: ", node);
+      if (node instanceof HTMLElement)
         this.setState({ width: node.offsetWidth });
-      }
     };
 
     render() {
       const { measureBeforeMount, ...rest } = this.props;
-      
-      console.log("Props: ", this.props);
-      console.log("State: ", this.state);
-
       if (measureBeforeMount && !this.mounted) {
         return (
           <div className={this.props.className} style={this.props.style} />
