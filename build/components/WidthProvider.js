@@ -52,9 +52,7 @@ function WidthProvider(ComposedComponent) {
         if (!_this.mounted) return;
         // eslint-disable-next-line
         var node = _reactDom2.default.findDOMNode(_this); // Flow casts this to Text | Element
-        if (node instanceof HTMLElement) {
-          _this.setState({ width: node.offsetWidth });
-        }
+        if (node instanceof HTMLElement) _this.setState({ width: node.offsetWidth });
       }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -67,7 +65,7 @@ function WidthProvider(ComposedComponent) {
       // Call to properly set the breakpoint and resize the elements.
       // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
       // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
-      var times = [500];
+      var times = [500, 1000, 1500];
       for (var _iterator = times, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
         var _ref;
 

@@ -47,7 +47,7 @@ export default function WidthProvider<
       // Call to properly set the breakpoint and resize the elements.
       // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
       // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
-      const times = [500];
+      const times = [500, 1000, 1500];
       for (let t of times) {
         setTimeout(() => {
           this.onWindowResize();
@@ -64,9 +64,8 @@ export default function WidthProvider<
       if (!this.mounted) return;
       // eslint-disable-next-line
       const node = ReactDOM.findDOMNode(this); // Flow casts this to Text | Element
-      if (node instanceof HTMLElement){
+      if (node instanceof HTMLElement)
         this.setState({ width: node.offsetWidth });
-      }
     };
 
     render() {

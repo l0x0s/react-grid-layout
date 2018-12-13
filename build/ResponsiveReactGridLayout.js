@@ -75,11 +75,6 @@ var ResponsiveReactGridLayout = function (_React$Component) {
     // for this layout.
     var initialLayout = (0, _responsiveUtils.findOrGenerateResponsiveLayout)(layouts, breakpoints, breakpoint, breakpoint, colNo, compactType);
 
-    console.log("gen initial state: ", {
-      layout: initialLayout,
-      breakpoint: breakpoint,
-      cols: colNo
-    });
     return {
       layout: initialLayout,
       breakpoint: breakpoint,
@@ -164,8 +159,6 @@ var ResponsiveReactGridLayout = function (_React$Component) {
         other = _objectWithoutProperties(_props2, ["breakpoint", "breakpoints", "cols", "layouts", "onBreakpointChange", "onLayoutChange", "onWidthChange"]);
     /* eslint-enable no-unused-vars */
 
-
-    console.log("This props ResponsiveReactGridLayout: ", this.props, "cols: ", this.state.cols);
     return _react2.default.createElement(_ReactGridLayout2.default, _extends({}, other, {
       onLayoutChange: this.onLayoutChange,
       layout: this.state.layout,
@@ -194,7 +187,6 @@ ResponsiveReactGridLayout.propTypes = {
   // layouts is an object mapping breakpoints to layouts.
   // e.g. {lg: Layout, md: Layout, ...}
   layouts: function layouts(props, propName) {
-
     if (type(props[propName]) !== "[object Object]") {
       throw new Error("Layout property must be an object. Received: " + type(props[propName]));
     }

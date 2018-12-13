@@ -71,7 +71,6 @@ export default class ResponsiveReactGridLayout extends React.Component<
     // layouts is an object mapping breakpoints to layouts.
     // e.g. {lg: Layout, md: Layout, ...}
     layouts(props: Props<>, propName: string) {
-
       if (type(props[propName]) !== "[object Object]") {
         throw new Error(
           "Layout property must be an object. Received: " +
@@ -136,11 +135,6 @@ export default class ResponsiveReactGridLayout extends React.Component<
       compactType
     );
 
-    console.log("gen initial state: ", {
-      layout: initialLayout,
-      breakpoint: breakpoint,
-      cols: colNo
-    })
     return {
       layout: initialLayout,
       breakpoint: breakpoint,
@@ -259,7 +253,7 @@ export default class ResponsiveReactGridLayout extends React.Component<
       ...other
     } = this.props;
     /* eslint-enable no-unused-vars */
-    console.log("This props ResponsiveReactGridLayout: ", this.props, "cols: ", this.state.cols)
+
     return (
       <ReactGridLayout
         {...other}
