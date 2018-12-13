@@ -42,12 +42,8 @@ export default function WidthProvider<
 
     componentDidMount() {
       this.mounted = true;
-      
 
       window.addEventListener("resize", this.onWindowResize);
-
-      this.onWindowResize();
-
       // Call to properly set the breakpoint and resize the elements.
       // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
       // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
@@ -70,8 +66,6 @@ export default function WidthProvider<
       // eslint-disable-next-line
       const node = ReactDOM.findDOMNode(this); // Flow casts this to Text | Element
       if (node instanceof HTMLElement){
-        console.log("Node: ", node);
-        console.log("node.offsetWidth: ", node.offsetWidth)
         this.setState({ width: node.offsetWidth });
       }
     };
@@ -79,14 +73,12 @@ export default function WidthProvider<
     render() {
       const { measureBeforeMount, ...rest } = this.props;
       if (measureBeforeMount && !this.mounted) {
-        console.log("render div")
-
         return (
           <div className={this.props.className} style={this.props.style} />
         );
-      }else{
-        return <ComposedComponent {...rest} {...this.state} />;
       }
+
+      return <ComposedComponent {...rest} {...this.state} />;
     }
   };
 }

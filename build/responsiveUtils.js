@@ -18,10 +18,13 @@ var _utils = require("./utils");
 function getBreakpointFromWidth(breakpoints, width) {
   var sorted = sortBreakpoints(breakpoints);
   var matching = sorted[0];
+  console.log("Breakpoints: ", sorted);
   for (var i = 1, len = sorted.length; i < len; i++) {
     var breakpointName = sorted[i];
     if (width > breakpoints[breakpointName]) matching = breakpointName;
   }
+  console.log("Matching: ", matching);
+
   return matching;
 }
 
@@ -37,6 +40,8 @@ function getColsFromBreakpoint(breakpoint, cols) {
   if (!cols[breakpoint]) {
     throw new Error("ResponsiveReactGridLayout: `cols` entry for breakpoint " + breakpoint + " is missing!");
   }
+  console.log("getColsFromBreakpoint: ", cols[breakpoint]);
+
   return cols[breakpoint];
 }
 
