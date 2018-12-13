@@ -48,8 +48,8 @@ function WidthProvider(ComposedComponent) {
 
       return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
         width: 1280
-      }, _this.mounted = false, _this.onWindowResize = function () {
-        if (!_this.mounted) return;
+      }, _this.mounted = false, _this.onWindowResize = function (hit) {
+        if (!_this.mounted && !hit) return;
         // eslint-disable-next-line
         var node = _reactDom2.default.findDOMNode(_this); // Flow casts this to Text | Element
         if (node instanceof HTMLElement) {
@@ -68,7 +68,7 @@ function WidthProvider(ComposedComponent) {
       // Call to properly set the breakpoint and resize the elements.
       // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
       // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
-      var times = [5000];
+      var times = [500, 1000, 1500];
       for (var _iterator = times, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
         var _ref;
 
@@ -84,7 +84,7 @@ function WidthProvider(ComposedComponent) {
         var t = _ref;
 
         setTimeout(function () {
-          _this2.onWindowResize();
+          _this2.onWindowResize(true);
         }, t);
       }
     };
